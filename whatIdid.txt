@@ -12,8 +12,12 @@ npm install --global nodemon
 
 nodemon bin\www
 
-add jquery to public javascript
+add jquery + ui to public javascript
 
 add script import to layout
 
 add script use to index.hbs
+
+create new drag page, .hbs .js and add route to app.js
+
+
