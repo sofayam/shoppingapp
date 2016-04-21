@@ -4,3 +4,16 @@ npm install
 
 git init
 
+-- to start do "npm start"
+
+git ignore node_modules
+
+npm install --global nodemon
+
+nodemon bin\www
+
+add jquery to public javascript
+
+add script import to layout
+
+add script use to index.hbs
