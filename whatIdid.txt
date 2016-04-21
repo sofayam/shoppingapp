@@ -1,0 +1,6 @@
+express --hbs shoppingapp
+
+npm install
+
+git init
+
