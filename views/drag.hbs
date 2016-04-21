@@ -1,7 +1,8 @@
- <h1> {{title}} </h1>
- <script>
+<h1> {{title}} </h1>
+<script>
   $(function() {
-    $( "#draggable" ).draggable();
+
+     $(".draggable").draggable()
     $( "#druggable" ).draggable();
     $( "#droppable" ).droppable({
       drop: function( event, ui ) {
@@ -12,20 +13,20 @@
       }
     });
   });
-  </script>
-
+</script>
 
 {{#times 10}} 
-<div id="draggable">
+<div class="draggable">
   <p>Drag me to my target {{this}}</p>
 </div>
 {{/times}}
 <div id="druggable">
-  <p>Drug me to my target {{this}}</p>
+  <p>Drug me to my target </p>
 </div>
  
 <div id="droppable">
   <p>Drop here</p>
 </div>
  
+
  
