@@ -20,4 +20,8 @@ add script use to index.hbs
 
 create new drag page, .hbs .js and add route to app.js
 
+git remote add origin https://github.com/sofayam/shoppingapp.git
+git push -u origin master
+
+
 
