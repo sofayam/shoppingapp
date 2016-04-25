@@ -24,4 +24,14 @@ git remote add origin https://github.com/sofayam/shoppingapp.git
 git push -u origin master
 
 
+# and now the local bitbucket
 
+git remote add bitbuk https://ANM2FR@sourcecode.socialcoding.bosch.com/scm/~anm2fr/shoppingapp.git
+
+# but only works if you switch off the ssl stuff
+
+git config --global http.sslVerify false
+
+# and then you can push it there explicitly
+
+git push -u bitbuk
