@@ -2,6 +2,8 @@
 
 <p>start of bics data
 <p>
-{{mydata}}
+{{#each mydata}}
+<li>{{this.attributes.item}}</li>
+{{/each}}
 
 <p>end of bics data

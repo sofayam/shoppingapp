@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var HttpsProxyAgent = require('https-proxy-agent');
+var uuid = require('uuid4');
 var agent = new HttpsProxyAgent('http://127.0.0.1:3128');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -8,12 +9,18 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
+    var thisUuid = uuid();
+    console.log("request", req.query);
+    console.log("uuid", thisUuid);
+    res.render('additem', {title: 'Lets Go Shopping', item: req.query.item})
 
     request({
-	uri: "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things?filter=and(exists(attributes/item),eq(attributes/type,\"purchase\"))", 
+
+	uri: "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid, 
 	auth: { user: "markandrew",
 		password: "markandrewPw1!" },
-	method: "GET",
+	method: "PUT",
+	json: {attributes: {type: "purchase", item: req.query.item}},
 	headers: {
 	    "Accept": "application/json",
 	    "Content-Type": "application/json",
@@ -24,11 +31,10 @@ router.get('/', function(req, res, next) {
 	followRedirect: true,
 	maxRedirects: 10}, 
 	    function(error, response, body) {
-		var bodydata = JSON.parse(body);
-		var items = bodydata.items;
-		res.render('restbics', {title: 'Results of get from BICS', mydata: items})
+		console.log(body);
 	    }
 	   )
+
 });
 
 
