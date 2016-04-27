@@ -13,28 +13,28 @@ router.get('/', function(req, res, next) {
     console.log("request", req.query);
     console.log("uuid", thisUuid);
     res.render('additem', {title: 'Lets Go Shopping', item: req.query.item})
+    if (req.query.item) {
+	request({
 
-    request({
-
-	uri: "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid, 
-	auth: { user: "markandrew",
-		password: "markandrewPw1!" },
-	method: "PUT",
-	json: {attributes: {type: "purchase", item: req.query.item}},
-	headers: {
-	    "Accept": "application/json",
-	    "Content-Type": "application/json",
-	    "x-cr-api-token": "6af616e401e24aa98425b825da995a7a"
-	},
-	agent: agent,
-	timeout: 1000,
-	followRedirect: true,
-	maxRedirects: 10}, 
-	    function(error, response, body) {
-		console.log(body);
-	    }
-	   )
-
+	    uri: "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid, 
+	    auth: { user: "markandrew",
+		    password: "markandrewPw1!" },
+	    method: "PUT",
+	    json: {attributes: {type: "purchase", item: req.query.item}},
+	    headers: {
+		"Accept": "application/json",
+		"Content-Type": "application/json",
+		"x-cr-api-token": "6af616e401e24aa98425b825da995a7a"
+	    },
+	    agent: agent,
+	    timeout: 1000,
+	    followRedirect: true,
+	    maxRedirects: 10}, 
+		function(error, response, body) {
+		    console.log(body);
+		}
+	       )
+    }
 });
 
 

@@ -1,8 +1,17 @@
 <h1>{{title}}</h1>
 
+{{#if item}}
 Congratulations!
 <p>
 You have added {{item}} to your list
+<p>
+What else would you like to buy?
+{{else}}
+<p>
+What would you like to buy?
+{{/if}}
 
-
-
+<form method="put">
+ <input type="text" name="item">
+ <input type="submit">
+</form>
