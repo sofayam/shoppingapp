@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 	    function(error, response, body) {
 		var bodydata = JSON.parse(body);
 		var items = bodydata.items;
-		res.render('restbics', {title: 'Results of get from BICS', mydata: items})
+		res.render('listitems', {title: 'Results of get from BICS', mydata: items})
 	    }
 	   )
 });

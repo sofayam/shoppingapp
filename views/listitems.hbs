@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <p>start of data
-<p>
-{{mydata}}
-
+{{#each mydata}}
+<li>{{this.attributes.item}}</li>
+{{/each}}
 <p>end of data

@@ -10,7 +10,6 @@ var hbs = require('hbs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var drag = require('./routes/drag');
-var restget = require('./routes/restget');
 var restbics = require('./routes/listitems');
 var additem = require('./routes/additem');
 
@@ -38,7 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/drag', drag);
-app.use('/restget', restget);
 app.use('/listitems', restbics);
 app.use('/additem', additem);
 
