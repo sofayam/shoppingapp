@@ -2,3 +2,4 @@
 /views/*.hbs~
 /routes/*.js~
 /npm-debug.log
+*~
