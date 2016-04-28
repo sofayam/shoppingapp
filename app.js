@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var drag = require('./routes/drag');
 var restbics = require('./routes/listitems');
 var additem = require('./routes/additem');
+var showitem = require('./routes/showitem');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use('/users', users);
 app.use('/drag', drag);
 app.use('/listitems', restbics);
 app.use('/additem', additem);
+app.use('/showitem', showitem);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
