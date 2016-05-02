@@ -1,6 +1,5 @@
 var express = require('express');
 var request = require('request');
-var querystring = require('querystring');
 
 var params = require('./restparams');
 
