@@ -14,6 +14,7 @@ var restbics = require('./routes/listitems');
 var additem = require('./routes/additem');
 var showitem = require('./routes/showitem');
 var delitem = require('./routes/delitem');
+var alloc = require('./routes/alloc');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/listitems', restbics);
 app.use('/additem', additem);
 app.use('/showitem', showitem);
 app.use('/delitem', delitem);
+app.use('/alloc', alloc);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
