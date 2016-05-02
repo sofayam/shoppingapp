@@ -29,15 +29,17 @@ $(document).ready(function() {
 	}, // end receive
     }) // end sortable
 
-
+    function createclosure(label) {
+	return function(event, ui) {
+	    alert("dropped on " + label);
+	}
+    }
 
     for (var i = 0; i < storelabels.length; i++) {
 	var storelabel = storelabels[i];
 	$(storelabel).sortable({ // begin sortable
 	    connectWith: labellist,
-	    receive: function(event, ui) { // begin receive
-		alert("dropped on" + storelabel)
-	    } // end receive 
+	    receive: createclosure(storelabel)
 	}); // end sortable
     }
 
