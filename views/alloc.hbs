@@ -8,15 +8,12 @@
     {{/each}}
 </ul>
 </div>    
-
+ 
+{{#each stores}}
 <div id="right">
-<h2>Store1</h2>
-<ul id="store1">
+<h2>{{this}}</h2>
+<ul id="{{this}}">
 
-</ul>
-<div id="right">
-<h2>Store2</h2>
-<ul id="store2">
-    <li>place</li>
 </ul>
 </div>
+{{/each}}
