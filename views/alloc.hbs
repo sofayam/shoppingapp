@@ -1,0 +1,19 @@
+<script src="/javascripts/connect.js"></script>
+
+<div id=left>
+<h2>From</h2>
+<ul id="from">
+    {{#each mydata}}
+    	    <li> {{this.id}} </li>
+    {{/each}}
+</ul>
+</div>    
+ 
+{{#each stores}}
+<div id="right">
+<h2>{{this}}</h2>
+<ul id="{{this}}">
+
+</ul>
+</div>
+{{/each}}
