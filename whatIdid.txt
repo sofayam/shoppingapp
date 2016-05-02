@@ -39,3 +39,12 @@ git push -u bitbuk
 (20160427)
 
 npm install node-rest-client
+
+added drag and drop using example code from http://jquery-ui-demos.webinaction.co.uk/connectwith-multiple.php to inspire dynamic list generation in /public/javascripts/connect.js
+
+TODO:
+
+refactor to allow switch between mongo and Things
+
+page to add new shops
+
