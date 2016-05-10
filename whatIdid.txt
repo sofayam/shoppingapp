@@ -42,6 +42,11 @@ npm install node-rest-client
 
 added drag and drop using example code from http://jquery-ui-demos.webinaction.co.uk/connectwith-multiple.php to inspire dynamic list generation in /public/javascripts/connect.js
 
+(20160510)
+
+patched up all (?) the missing refs in packages.json by using npm install <foo> --save
+
+
 TODO:
 
 refactor to allow switch between mongo and Things
