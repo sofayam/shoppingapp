@@ -47,9 +47,16 @@ added drag and drop using example code from http://jquery-ui-demos.webinaction.c
 patched up all (?) the missing refs in packages.json by using npm install <foo> --save
 
 
-TODO:
+refactor to allow switch between mongo and Things and non persistent local mock objects
 
-refactor to allow switch between mongo and Things
+installed debugger {
+	  npm install -g node-inspector
+	  node-debug bin/www
+}
+
+TODO
 
 page to add new shops
+
+
 

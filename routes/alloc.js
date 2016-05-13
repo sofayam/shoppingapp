@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var model = require('../model/model.js');
 
 var router = express.Router();
 
