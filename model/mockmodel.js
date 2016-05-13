@@ -24,10 +24,16 @@ exports.getItems = function() {
 exports.addItem = function(itemName) {
     exports.items.push(createItem(itemName));
 }
+
+exports.getItem = function(id) {
+    // lazy and inefficient
+    for (var i = 0; i < exports.items.length; i++) {
+	if (exports.items[i].thingId == id) {
+	  return exports.items[i];  
+	}
+    }
+}
+
 exports.foo = function() {
     console.log("requiring cr");
 }
-
-
-
-
