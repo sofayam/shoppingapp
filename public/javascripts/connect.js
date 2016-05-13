@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 
     // get the list of possible stores from db
-    var stores = ["store1", "store2", "store3"];
+    var stores = getStores(); //["store1", "store2", "store3"];
     function concatlabels(storelabels) {
 	res = ""
 	for (var i = 0; i < storelabels.length; i++) {
