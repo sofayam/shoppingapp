@@ -14,22 +14,22 @@ function setupItems(count) {
 }
 
 
-exports.items = setupItems(10);
+var items = setupItems(10);
 
 exports.getItems = function() {
     console.log("getting items");
-    return exports.items;
+    return items;
 }
 
 exports.addItem = function(itemName) {
-    exports.items.push(createItem(itemName));
+    items.push(createItem(itemName));
 }
 
 exports.getItem = function(id) {
     // lazy and inefficient
-    for (var i = 0; i < exports.items.length; i++) {
-	if (exports.items[i].thingId == id) {
-	  return exports.items[i];  
+    for (var i = 0; i < items.length; i++) {
+	if (items[i].thingId == id) {
+	  return items[i];  
 	}
     }
 }
