@@ -1,0 +1,17 @@
+<h1>{{title}}</h1>
+
+{{#if item}}
+Congratulations!
+<p>
+You have added a new store called {{item}} to your list
+<p>
+What other stores do you want to add?
+{{else}}
+<p>
+Which store do you want to add?
+{{/if}}
+
+<form method="put">
+ <input type="text" name="item" autofocus>
+ <input type="submit">
+</form>

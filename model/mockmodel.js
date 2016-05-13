@@ -43,6 +43,9 @@ exports.getStores = function() {
 exports.addItem = function(itemName) {
     items.push(createItem(itemName));
 }
+exports.addStore = function(itemName) {
+    stores.push(createStore(itemName));
+}
 
 exports.getItem = function(id) {
     // lazy and inefficient
