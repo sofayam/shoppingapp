@@ -4,7 +4,7 @@
 function getStores() {
 return [
 {{#each stores}}
-   "{{this.thingId}}",
+   "{{this.id}}",
 {{/each}}
 	];
 	// TBD MWA: Is the above a disgraceful hack or the only way of communicating forward to jquery from the generating page?
@@ -22,8 +22,8 @@ return [
  
 {{#each stores}}
 <div id="right">
-<h2>{{this.attributes.name}}</h2>
-<ul id="{{this.thingId}}">
+<h2>{{this.name}}</h2>
+<ul id="{{this.id}}">
 
 </ul>
 </div>
