@@ -31,7 +31,21 @@ $(document).ready(function() {
 
     function createclosure(label) {
 	return function(event, ui) {
-	    alert("dropped on " + label);
+	    $.ajax({
+		type: "GET",
+		url: "/setstoreforitem",
+//		contentType: 'application/json; charset=utf-8',
+		data: {
+			itemId: event.toElement.id,
+			storeId: event.target.id 
+		},
+		success: function(result) {
+		    alert("dropped on " + 
+			  event.target.id + 
+			  " :: " + 
+			  event.toElement.id);
+		},
+	    });
 	}
     }
 

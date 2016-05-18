@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 
+var model = require('./model/model');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var drag = require('./routes/drag');
@@ -47,6 +49,13 @@ app.use('/showitem', showitem);
 app.use('/delitem', delitem);
 app.use('/alloc', alloc);
 
+
+app.use('/setstoreforitem', function (req, res) {
+//    console.log("here are the params " + req.query.storeId);
+    model.setStoreForItem(req.query.storeId, req.query.itemId);
+    res.redirect('/');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -77,6 +86,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;

@@ -5,7 +5,7 @@ function createItem(itemName) {
 }
 
 function createStore(storeName) {
-    return {storeId: uuid(), attributes: {name: storeName}};
+    return {thingId: uuid(), attributes: {name: storeName}};
 }
 
 function setupItems(count) {
@@ -26,9 +26,9 @@ function setupStores(count) {
 }
 
 
-var items = setupItems(10);
+var items = setupItems(4);
 
-var stores = setupStores(5);
+var stores = setupStores(4);
 
 exports.getItems = function() {
     console.log("getting items");
@@ -48,14 +48,22 @@ exports.addStore = function(itemName) {
 }
 
 exports.getItem = function(id) {
+    console.log("get item");
     // lazy and inefficient
     for (var i = 0; i < items.length; i++) {
 	if (items[i].thingId == id) {
+	  console.log("got item");
 	  return items[i];  
 	}
     }
 }
 
-exports.foo = function() {
-    console.log("requiring cr");
+
+
+exports.setStoreForItem = function(storeId, itemId) {
+    console.log("setting store");
+    item = exports.getItem(itemId);
+    console.log(item);
+    item.attributes.store = storeId;
+    console.log(item);
 }
