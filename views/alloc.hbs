@@ -12,7 +12,7 @@ return [
 }
 </script>
 <div id=left>
-<h2>From</h2>
+<h2>Unallocated Items</h2>
 <ul id="from">
     {{#each mydata}}
     	    <li id={{this.thingId}}> {{this.attributes.item}} </li>
@@ -22,9 +22,12 @@ return [
  
 {{#each stores}}
 <div id="right">
-<h2>{{this.name}}</h2>
-<ul id="{{this.id}}">
+<h2>Buy at {{this.name}}</h2>
 
+<ul id="{{this.id}}">
+{{#each this.items}}
+<li id={{this.thingId}}> {{this.attributes.item}}</li>
+{{/each}}
 </ul>
 </div>
 {{/each}}

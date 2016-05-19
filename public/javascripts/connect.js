@@ -40,10 +40,10 @@ $(document).ready(function() {
 			storeId: event.target.id 
 		},
 		success: function(result) {
-		    alert("dropped on " + 
-			  event.target.id + 
-			  " :: " + 
-			  event.toElement.id);
+//		    alert("dropped on " + 
+//			  event.target.id + 
+//			  " :: " + 
+//			  event.toElement.id);
 		},
 	    });
 	}
