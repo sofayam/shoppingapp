@@ -4,10 +4,12 @@ var router = express.Router();
 
 router.get('/', function(req, resp, next) {
 
-    console.log("value of req:" + JSON.stringify(req.keys()));
-    console.log("value of resp:" + JSON.stringify(resp.keys()));
+    var id = req.query.id;
 
-    item = model.getItem(req, function(item) {
+    console.log("value of req:" + id);
+    //console.log("value of resp:" + JSON.stringify(resp.keys()));
+
+    model.getItem(id, function(item) {
 	console.log("you gave me the item " + item);
 	resp.render('showitem', 
 		   {title: 'contents of ' + req.query.id, 

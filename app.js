@@ -50,7 +50,8 @@ app.use('/delitem', delitem);
 app.use('/alloc', alloc);
 
 app.use('/test', function(req, res) {
-    console.log("here are the params: " + typeof req.keys() + "  " + typeof res.keys())
+    
+    console.log("here are the params: " + req.query.id)
     res.redirect('/');
 });
 

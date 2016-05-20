@@ -49,9 +49,9 @@ exports.getStores = function(callback) {
 };
 
 
-exports.getItem = function(req, callback) {
+exports.getItem = function(id, callback) {
     var params = restparams.getParams();
-    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + req.query.id ;
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
     console.log("URI: ", params.uri);
     params.method = "GET";
 
@@ -75,9 +75,6 @@ exports.getItem = function(req, callback) {
 		//console.log("bodydata : ", bodydata);
 		//console.log("bodydata type: ", typeof bodydata);
 		callback && callback(bodydata);
-		res.render('showitem', 
-			   {title: 'contents of ' + req.query.id, 
-			    item: JSON.stringify(bodydata,undefined," ")})
 	    }
 	   )
 
@@ -94,7 +91,7 @@ exports.addItem = function(item) { // JUST puts the name
  
     params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
     params.method = "PUT";
-    params.json = {attributes: {type: "purchase", item: req.query.item}};
+    params.json = {attributes: {type: "purchase", item: req.queryitem}};
 
     request(
 	params,

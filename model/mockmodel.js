@@ -47,15 +47,17 @@ exports.addStore = function(itemName) {
     stores.push(createStore(itemName));
 }
 
-exports.getItem = function(id) {
+exports.getItem = function(id, callback) {
     console.log("get item");
-    // lazy and inefficient
+    var item;
+    // TBD lazy and inefficient
     for (var i = 0; i < items.length; i++) {
 	if (items[i].thingId == id) {
 	  console.log("got item");
-	  return items[i];  
+	  item = items[i];  
 	}
     }
+    callback && callback(item);
 }
 
 
