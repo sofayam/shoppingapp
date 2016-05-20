@@ -30,14 +30,14 @@ var items = setupItems(4);
 
 var stores = setupStores(4);
 
-exports.getItems = function() {
+exports.getItems = function(callback) {
     console.log("getting items");
-    return items;
+    callback && callback(items);
 }
 
-exports.getStores = function() {
+exports.getStores = function(callback) {
     console.log("getting stores");
-    return stores;
+    callback && callback(stores);
 }
 
 exports.addItem = function(itemName) {

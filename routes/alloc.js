@@ -18,37 +18,39 @@ router.get('/', function(req, res, next) {
 	
     var storesWithItems = {}
     var remainingItems = []
-    var stores = model.getStores();
-    var storeIds = getStoreIds(stores);
-    var items = model.getItems();
+  
+    model.getStores(function(stores) {
+	var storeIds = getStoreIds(stores);
+	model.getItems(function(items) {
 
-    console.log("Stores " + JSON.stringify(stores));
+	    console.log("Stores " + JSON.stringify(stores));
 
-    for (var i=0; i < stores.length; i++) {
-	storeId = stores[i].thingId;
-	storesWithItems[storeId] = {id: storeId, name: stores[i].attributes.name, items: []};
-    }
-    console.log("Stores with items: " + JSON.stringify(storesWithItems));
-
-    for (var i=0; i < items.length; i++) {
-	item = items[i];
-//	if ("store" in item.attributes) {
-	    if (item.attributes.store in storeIds) { 
-		// TBD what about orphan items?
-		storesWithItems[item.attributes.store].items.push(item);
-	    } else {
-		remainingItems.push(item);
+	    for (var i=0; i < stores.length; i++) {
+		storeId = stores[i].thingId;
+		storesWithItems[storeId] = {id: storeId, name: stores[i].attributes.name, items: []};
 	    }
-//	}
-    }
-    
-    console.log("Stores with items: " + JSON.stringify(storesWithItems));
+	    console.log("Stores with items: " + JSON.stringify(storesWithItems));
 
-    res.render('alloc', 
-	       {title: "Allocate your shopping", 
-		mydata: remainingItems,
-		stores: storesWithItems
-	       })
+	    for (var i=0; i < items.length; i++) {
+		item = items[i];
+		//	if ("store" in item.attributes) {
+		if (item.attributes.store in storeIds) { 
+		    // TBD what about orphan items?
+		    storesWithItems[item.attributes.store].items.push(item);
+		} else {
+		    remainingItems.push(item);
+		}
+		//	}
+	    }
+	    
+	    console.log("Stores with items: " + JSON.stringify(storesWithItems));
+	    
+	    res.render('alloc', 
+		       {title: "Allocate your shopping", 
+			mydata: remainingItems,
+			stores: storesWithItems
+		       })
+	})
+    })
 })
-
 module.exports = router

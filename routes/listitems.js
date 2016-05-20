@@ -5,8 +5,9 @@ var model = require('../model/model.js');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    var items = model.getItems()
-    res.render('listitems', {title: 'Here are your items', mydata: items})
+    var items = model.getItems(function (items) {
+	res.render('listitems', {title: 'Here are your items', mydata: items})
+    })
 });
 
 
