@@ -5,9 +5,12 @@ var model = require('../model/model.js');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    if (req.query.item) {
-	model.delItem(req.query.item)
+    var id = req.query.id;
+    console.log("deleting item with id: " + id) 
+    if (id) {
+	model.delItem(id)
     }
+    res.redirect('/listitems');
 });
 
 module.exports = router;

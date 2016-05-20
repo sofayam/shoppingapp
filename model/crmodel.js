@@ -103,22 +103,18 @@ exports.addItem = function(item) { // JUST puts the name
 
 
 
-exports.delItem = function() {
+exports.delItem = function(id) {
     var params = restparams.getParams();
-    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + req.query.id ;
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
     console.log("URI: ", params.uri);
     params.method = "DELETE";
 
     request(params, 
 	    function(error, response, body) {
-		console.log("response: ", response);
-		console.log("error: ", error);
-		console.log("type of body: ", typeof body); 
-
-		//res.render('delitem', 
-		//	   {title: 'item deleted ' + req.query.id})
-		res.redirect('/listitems');
-
+		console.log("item deleted");
+		//console.log("response: ", response);
+		//console.log("error: ", error);
+		//console.log("type of body: ", typeof body); 
 	    }
 	   )
 };

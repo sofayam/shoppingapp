@@ -69,3 +69,20 @@ exports.setStoreForItem = function(storeId, itemId) {
     item.attributes.store = storeId;
     console.log(item);
 }
+
+exports.delItem = function(id) {
+    console.log("deleting item");
+    var index = -1;
+    // TBD lazy and inefficient
+    for (var i = 0; i < items.length; i++) {
+	if (items[i].thingId == id) {
+	  console.log("got item");
+	  index = i;  
+	}
+    }
+    if (index > -1) {
+	items.splice(index,1)
+    } else {
+	console.log ("item not found during delete " + itemId)
+    }
+}
