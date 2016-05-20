@@ -43,8 +43,8 @@ exports.getStores = function(callback) {
 exports.addItem = function(itemName) {
     items.push(createItem(itemName));
 }
-exports.addStore = function(itemName) {
-    stores.push(createStore(itemName));
+exports.addStore = function(storeName) {
+    stores.push(createStore(storeName));
 }
 
 exports.getItem = function(id, callback) {

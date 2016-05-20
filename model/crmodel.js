@@ -44,9 +44,30 @@ exports.getItems = function(callback) {
 
 exports.getStores = function(callback) {
 
-    //tbd
+    
+    var params = restparams.getParams();
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things?filter=and(exists(attributes/name),eq(attributes/type,\"store\"))";
+    params.method = "GET";
 
+    request(params, 
+	    function(error, response, body) {
+		try {
+		    // TBD complete mystery, sometimes the body arrives preparsed, 
+		    // sometimes as a string
+		    var bodydata = body;
+		    if (typeof body == "string") {
+			bodydata = JSON.parse(body);
+		    } 
+		} catch(e) {
+		    return console.error(e);
+		};
+		//console.log("bodydata : ", bodydata);
+		var items = bodydata.items;
+		callback(items)
+	    }
+	   )
 };
+
 
 
 exports.getItem = function(id, callback) {
@@ -83,7 +104,7 @@ exports.getItem = function(id, callback) {
 }
 
 // add item raw materials
-exports.addItem = function(item) { // JUST puts the name
+exports.addItem = function(itemName) { // JUST puts the name
     var params = restparams.getParams();
 
     var thisUuid = uuid();
@@ -91,7 +112,25 @@ exports.addItem = function(item) { // JUST puts the name
  
     params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
     params.method = "PUT";
-    params.json = {attributes: {type: "purchase", item: req.queryitem}};
+    params.json = {attributes: {type: "purchase", item: itemName}};
+
+    request(
+	params,
+	function(error, response, body) {
+	    console.log(body);
+	}
+    )
+}
+
+exports.addStore = function(storeName) {
+    var params = restparams.getParams();
+
+    var thisUuid = uuid();
+    console.log("uuid", thisUuid);
+ 
+    params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
+    params.method = "PUT";
+    params.json = {attributes: {type: "store", name: storeName}};
 
     request(
 	params,
