@@ -49,6 +49,10 @@ app.use('/showitem', showitem);
 app.use('/delitem', delitem);
 app.use('/alloc', alloc);
 
+app.use('/test', function(req, res) {
+    console.log("here are the params: " + typeof req.keys() + "  " + typeof res.keys())
+    res.redirect('/');
+});
 
 app.use('/setstoreforitem', function (req, res) {
 //    console.log("here are the params " + req.query.storeId);
