@@ -1,11 +1,11 @@
 var uuid = require('uuid4');
 
 function createItem(itemName) {
-    return {thingId: uuid(), attributes: {item: itemName}};
+    return {thingId: "markandrew:" + uuid(), attributes: {item: itemName}};
 }
 
 function createStore(storeName) {
-    return {thingId: uuid(), attributes: {name: storeName}};
+    return {thingId: "markandrew:" + uuid(), attributes: {name: storeName}};
 }
 
 function setupItems(count) {
@@ -26,7 +26,7 @@ function setupStores(count) {
 }
 
 
-var items = setupItems(4);
+var items = setupItems(10);
 
 var stores = setupStores(4);
 
@@ -63,11 +63,11 @@ exports.getItem = function(id, callback) {
 
 
 exports.setStoreForItem = function(storeId, itemId) {
-    console.log("setting store");
-    item = exports.getItem(itemId);
-    console.log(item);
-    item.attributes.store = storeId;
-    console.log(item);
+    console.log("setting store id: " + storeId + " on item id: " + itemId);
+    item = exports.getItem(itemId, function(item) {
+	item.attributes.store = storeId
+	console.log("after: " + JSON.stringify(item));
+    });
 }
 
 exports.delItem = function(id) {

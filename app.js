@@ -57,7 +57,15 @@ app.use('/test', function(req, res) {
 
 app.use('/setstoreforitem', function (req, res) {
 //    console.log("here are the params " + req.query.storeId);
-    model.setStoreForItem(req.query.storeId, req.query.itemId);
+    // TBD horrible hack to see how easily we can make CR ids html tag-fähig
+    function tocol (nocol) {
+	var col = nocol.replace('Z', ':');
+	console.log("col: " + col)
+	return col
+    };
+    var storeId = tocol(req.query.storeId);
+    var itemId = tocol(req.query.itemId);
+    model.setStoreForItem(storeId, itemId);
     res.redirect('/');
 });
 
