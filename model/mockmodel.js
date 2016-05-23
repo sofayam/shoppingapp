@@ -1,65 +1,84 @@
 var uuid = require('uuid4');
 
+
 function createItem(itemName) {
-    return {thingId: "markandrew:" + uuid(), attributes: {item: itemName}};
+    return {thingId: "markandrew:" + uuid(), 
+	    attributes: {item: itemName, type: "purchase"}};
 }
 
 function createStore(storeName) {
-    return {thingId: "markandrew:" + uuid(), attributes: {name: storeName}};
+    return {thingId: "markandrew:" + uuid(), 
+	    attributes: {name: storeName, type: "store"}};
 }
 
-function setupItems(count) {
-    var items = [] 
+function setupItems(things, count) {
     while(count > 0) {
-	items.push(createItem("item" + count));
+	var item = createItem("item" + count);
+	things[item.thingId] = item;
 	count = count - 1
     }
-    return items
 }
-function setupStores(count) {
-    var stores = [] 
+
+function setupStores(things, count) {
     while(count > 0) {
-	stores.push(createStore("store" + count));
+	var store = createStore("store" + count);
+	things[store.thingId] = store
 	count = count - 1
     }
-    return stores
 }
 
 
-var items = setupItems(10);
+var things = {};
 
-var stores = setupStores(4);
+setupItems(things,2);
+//console.log("All your things " + JSON.stringify(things));
+setupStores(things,2);
+//console.log("All your things " + JSON.stringify(things));
+
+//var items = setupItems(10);
+
+//var stores = setupStores(4);
+
+function getType(type) {
+    var found = []
+    console.log("Looking at things for type" + JSON.stringify(type));
+    for (id in things) {
+	console.log("Looking at thing" + JSON.stringify(things[id]));
+	if (things[id].attributes.type == type) {
+	    console.log("pushing thing" + JSON.stringify(id));
+	    found.push(things[id])
+	}
+    }
+    return found
+}
+
 
 exports.getItems = function(callback) {
     console.log("getting items");
+    var items = getType("purchase");
     callback && callback(items);
 }
 
 exports.getStores = function(callback) {
     console.log("getting stores");
+    var stores = getType("store");
     callback && callback(stores);
 }
 
 exports.addItem = function(itemName) {
-    items.push(createItem(itemName));
+    var item = createItem(itemName);
+    things[item.thingId] = item;
 }
 exports.addStore = function(storeName) {
-    stores.push(createStore(storeName));
+    var store = createStore(storeName);
+    things[item.thingId] = store;
 }
 
-exports.getItem = function(id, callback) {
-    console.log("get item");
-    var item;
-    // TBD lazy and inefficient
-    for (var i = 0; i < items.length; i++) {
-	if (items[i].thingId == id) {
-	  console.log("got item");
-	  item = items[i];  
-	}
-    }
-    callback && callback(item);
+exports.getThing = function(id, callback) {
+    console.log("get thing");
+    var thing = things[id];
+    callback && callback(thing);
 }
-
 
 
 exports.setStoreForItem = function(storeId, itemId) {
@@ -70,19 +89,7 @@ exports.setStoreForItem = function(storeId, itemId) {
     });
 }
 
-exports.delItem = function(id) {
-    console.log("deleting item");
-    var index = -1;
-    // TBD lazy and inefficient
-    for (var i = 0; i < items.length; i++) {
-	if (items[i].thingId == id) {
-	  console.log("got item");
-	  index = i;  
-	}
-    }
-    if (index > -1) {
-	items.splice(index,1)
-    } else {
-	console.log ("item not found during delete " + itemId)
-    }
+exports.delThing = function(id) {
+    console.log("deleting a thing");
+    delete things[id];
 }
