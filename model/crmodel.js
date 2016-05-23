@@ -140,7 +140,23 @@ exports.addStore = function(storeName) {
     )
 }
 
-
+exports.setStoreForItem = function(storeId, itemId) {
+    var params = restparams.getParams();
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + itemId +
+	"/attributes/store";
+    console.log("URI: ", params.uri);
+    params.method = "PUT";
+    params.json = storeId;
+    request(params, 
+	    function(error, response, body) {
+		console.log("item deleted");
+		//console.log("response: ", response);
+		//console.log("error: ", error);
+		//console.log("type of body: ", typeof body); 
+	    }
+	   )
+    
+}
 
 exports.delItem = function(id) {
     var params = restparams.getParams();
