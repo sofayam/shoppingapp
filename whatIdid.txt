@@ -54,9 +54,10 @@ installed debugger {
 	  node-debug bin/www
 }
 
-TODO
+page to add locations for shops using google maps api and my api key for which I
+had to pray to google on bended knees somehow (not sure how long that will hold up)
 
-page to add new shops
+
 
 
 

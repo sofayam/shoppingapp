@@ -32,7 +32,7 @@ var things = {};
 
 setupItems(things,2);
 //console.log("All your things " + JSON.stringify(things));
-setupStores(things,2);
+setupStores(things,4);
 //console.log("All your things " + JSON.stringify(things));
 
 //var items = setupItems(10);
@@ -77,7 +77,7 @@ exports.addItem = function(itemName) {
 }
 exports.addStore = function(storeName) {
     var store = createStore(storeName);
-    things[item.thingId] = store;
+    things[store.thingId] = store;
 }
 
 exports.getThing = function(id, callback) {
@@ -100,8 +100,8 @@ exports.delThing = function(id) {
     delete things[id];
 }
 
-exports.setLoc = function(id, lng, lat) {
+exports.setLoc = function(id, lng, lat, title) {
     console.log("setting loc for store id: " + id + " at: " + lng + " x " + lat);
-    things[id].attributes.position = {lng: lng, lat: lat}
+    things[id].attributes.position = {lng: lng, lat: lat, title: title}
 }
     

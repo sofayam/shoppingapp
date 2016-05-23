@@ -11,6 +11,8 @@ router.get('/', function(req, res, next) {
 	model.addStore(req.query.item);
 
     }
+
+
 });
 
 

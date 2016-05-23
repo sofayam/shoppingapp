@@ -31,6 +31,7 @@ function initAutocomplete() {
 		id: getParams().id,
 		lng: this.position.lng(),
 		lat: this.position.lat(),
+		title: this.title
 	    },
 	    success: function(result) {
 		//		    alert("dropped on " + 
