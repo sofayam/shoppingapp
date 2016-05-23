@@ -15,7 +15,7 @@ return [
 <h2>Unallocated Items</h2>
 <ul id="from">
     {{#each mydata}}
-    	    <li id={{this.thingId}}> {{this.attributes.item}} </li>
+    	    <li id={{this.thingId}}> {{this.attributes.name}} </li>
     {{/each}}
 </ul>
 </div>    
@@ -26,7 +26,7 @@ return [
 
 <ul id="{{this.id}}">
 {{#each this.items}}
-<li id={{this.thingId}}> {{this.attributes.item}}</li>
+<li id={{this.thingId}}> {{this.attributes.name}}</li>
 {{/each}}
 </ul>
 </div>

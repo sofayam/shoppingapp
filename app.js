@@ -9,16 +9,14 @@ var hbs = require('hbs');
 var model = require('./model/model');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var drag = require('./routes/drag');
 var listitems = require('./routes/listitems');
 var liststores = require('./routes/liststores');
+var listthings = require('./routes/listthings');
 var additem = require('./routes/additem');
 var addstore = require('./routes/addstore');
 var showthing = require('./routes/showthing');
 var delthing = require('./routes/delthing');
 var alloc = require('./routes/alloc');
-
 
 var app = express();
 
@@ -42,15 +40,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/drag', drag);
 app.use('/listitems', listitems);
 app.use('/liststores', liststores);
+app.use('/listthings', listthings);
 app.use('/additem', additem);
 app.use('/addstore', addstore);
 app.use('/showthing', showthing);
 app.use('/delthing', delthing);
 app.use('/alloc', alloc);
+
 
 app.use('/test', function(req, res) {
     

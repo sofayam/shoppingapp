@@ -3,7 +3,7 @@ var uuid = require('uuid4');
 
 function createItem(itemName) {
     return {thingId: "markandrew:" + uuid(), 
-	    attributes: {item: itemName, type: "purchase"}};
+	    attributes: {name: itemName, type: "purchase"}};
 }
 
 function createStore(storeName) {
@@ -44,7 +44,7 @@ function getType(type) {
     console.log("Looking at things for type" + JSON.stringify(type));
     for (id in things) {
 	console.log("Looking at thing" + JSON.stringify(things[id]));
-	if (things[id].attributes.type == type) {
+	if ((things[id].attributes.type == type) || (type == null)){
 	    console.log("pushing thing" + JSON.stringify(id));
 	    found.push(things[id])
 	}
@@ -62,6 +62,12 @@ exports.getItems = function(callback) {
 exports.getStores = function(callback) {
     console.log("getting stores");
     var stores = getType("store");
+    callback && callback(stores);
+}
+
+exports.getThings = function(callback) {
+    console.log("getting things");
+    var stores = getType();
     callback && callback(stores);
 }
 
