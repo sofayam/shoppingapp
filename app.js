@@ -18,6 +18,7 @@ var showthing = require('./routes/showthing');
 var delthing = require('./routes/delthing');
 var alloc = require('./routes/alloc');
 var chooseloc = require('./routes/chooseloc');
+var setloc = require('./routes/setloc');
 
 var app = express();
 
@@ -41,6 +42,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+
+// TBD how to avoid this repetitious crap ???
 app.use('/listitems', listitems);
 app.use('/liststores', liststores);
 app.use('/listthings', listthings);
@@ -50,6 +53,7 @@ app.use('/showthing', showthing);
 app.use('/delthing', delthing);
 app.use('/alloc', alloc);
 app.use('/chooseloc', chooseloc);
+app.use('/setloc', setloc);
 
 app.use('/test', function(req, res) {
     

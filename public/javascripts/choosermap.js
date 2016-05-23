@@ -21,10 +21,28 @@ function initAutocomplete() {
     });
 
 
-    function clickyMe(ev) {
-	this.setTitle("hahahhah");
-	alert("you clicked on me" + this.position)
+    function setPos(ev) {
+	// alert("you clicked on me" + this.position)
+	$.ajax({
+	    type: "GET",
+	    url: "/setloc",
+	    //		contentType: 'application/json; charset=utf-8',
+	    data: {
+		id: getParams().id,
+		lng: this.position.lng(),
+		lat: this.position.lat(),
+	    },
+	    success: function(result) {
+		//		    alert("dropped on " + 
+		//			  event.target.id + 
+		//			  " :: " + 
+		//			  event.toElement.id);
+	    },
+	});
+	location.replace(document.referrer);
+
     }
+
     var markers = [];
     // [START region_getplaces]
     // Listen for the event fired when the user selects a prediction and retrieve
@@ -62,7 +80,7 @@ function initAutocomplete() {
 		position: place.geometry.location
 	    });
 	    markers.push(markie);
-	    markie.addListener('click', clickyMe);
+	    markie.addListener('click', setPos);
 	    if (place.geometry.viewport) {
 		// Only geocodes have viewport.
 		bounds.union(place.geometry.viewport);
