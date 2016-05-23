@@ -17,6 +17,7 @@ var addstore = require('./routes/addstore');
 var showthing = require('./routes/showthing');
 var delthing = require('./routes/delthing');
 var alloc = require('./routes/alloc');
+var chooseloc = require('./routes/chooseloc');
 
 var app = express();
 
@@ -48,7 +49,7 @@ app.use('/addstore', addstore);
 app.use('/showthing', showthing);
 app.use('/delthing', delthing);
 app.use('/alloc', alloc);
-
+app.use('/chooseloc', chooseloc);
 
 app.use('/test', function(req, res) {
     
