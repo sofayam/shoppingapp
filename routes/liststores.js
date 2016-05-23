@@ -1,16 +1,14 @@
 var express = require('express');
+var request = require('request');
 var model = require('../model/model.js');
-
 
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    var id = req.query.id;
-    console.log("deleting item with id: " + id) 
-    if (id) {
-	model.delItem(id)
-    }
-    res.redirect('/listitems');
+    var items = model.getStores(function (items) {
+	res.render('liststores', {title: 'Here are your stores', mydata: items})
+    })
 });
+
 
 module.exports = router;

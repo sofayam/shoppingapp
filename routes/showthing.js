@@ -9,11 +9,11 @@ router.get('/', function(req, resp, next) {
     console.log("value of req:" + id);
     //console.log("value of resp:" + JSON.stringify(resp.keys()));
 
-    model.getItem(id, function(item) {
-	console.log("you gave me the item " + item);
-	resp.render('showitem', 
+    model.getThing(id, function(thing) {
+	console.log("you gave me the thing " + thing);
+	resp.render('showthing', 
 		   {title: 'contents of ' + req.query.id, 
-		    item: JSON.stringify(item,undefined," ")}
+		    item: JSON.stringify(thing,undefined," ")}
 		  )
     })
 });

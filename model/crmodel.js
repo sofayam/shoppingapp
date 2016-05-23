@@ -70,7 +70,7 @@ exports.getStores = function(callback) {
 
 
 
-exports.getItem = function(id, callback) {
+exports.getThing= function(id, callback) {
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
     console.log("URI: ", params.uri);
@@ -158,7 +158,7 @@ exports.setStoreForItem = function(storeId, itemId) {
     
 }
 
-exports.delItem = function(id) {
+exports.delThing = function(id) {
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
     console.log("URI: ", params.uri);
@@ -173,3 +173,5 @@ exports.delItem = function(id) {
 	    }
 	   )
 };
+
+

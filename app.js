@@ -11,12 +11,14 @@ var model = require('./model/model');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var drag = require('./routes/drag');
-var restbics = require('./routes/listitems');
+var listitems = require('./routes/listitems');
+var liststores = require('./routes/liststores');
 var additem = require('./routes/additem');
 var addstore = require('./routes/addstore');
-var showitem = require('./routes/showitem');
-var delitem = require('./routes/delitem');
+var showthing = require('./routes/showthing');
+var delthing = require('./routes/delthing');
 var alloc = require('./routes/alloc');
+
 
 var app = express();
 
@@ -42,11 +44,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/drag', drag);
-app.use('/listitems', restbics);
+app.use('/listitems', listitems);
+app.use('/liststores', liststores);
 app.use('/additem', additem);
 app.use('/addstore', addstore);
-app.use('/showitem', showitem);
-app.use('/delitem', delitem);
+app.use('/showthing', showthing);
+app.use('/delthing', delthing);
 app.use('/alloc', alloc);
 
 app.use('/test', function(req, res) {
