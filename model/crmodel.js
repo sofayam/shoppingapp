@@ -193,4 +193,12 @@ exports.delThing = function(id) {
 	   )
 };
 
+function setCRAttribute(id, key, value) {
+    console.log("******************setting attribute " + key + " to " + JSON.stringify(val) + " on " + id)
+}
 
+exports.setLoc = function(id, lat, lng, title) {
+    console.log("********++++++++++ setting location");
+    setCRAttribute(id, "position", {lng: lng, lat: lat, title: title});
+    console.log("****** set location");
+}

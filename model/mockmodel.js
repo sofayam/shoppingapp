@@ -100,7 +100,7 @@ exports.delThing = function(id) {
     delete things[id];
 }
 
-exports.setLoc = function(id, lng, lat, title) {
+exports.setLoc = function(id, lat, lng, title) {
     console.log("setting loc for store id: " + id + " at: " + lng + " x " + lat);
     things[id].attributes.position = {lng: lng, lat: lat, title: title}
 }
