@@ -193,12 +193,30 @@ exports.delThing = function(id) {
 	   )
 };
 
-function setCRAttribute(id, key, value) {
-    console.log("******************setting attribute " + key + " to " + JSON.stringify(val) + " on " + id)
+
+
+function setCRAttribute(id,key,val) {
+    //console.log("setting attribute",id,key,val);
+
+    var params = restparams.getParams();
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id +
+	"/attributes/" + key;
+    console.log("URI: ", params.uri);
+    params.method = "PUT";
+    params.json = val;
+    request(params, 
+	    function(error, response, body) {
+		//console.log("thing set returned");
+		//console.log("response: ", response);
+		//console.log("error: ", error);
+		//console.log("type of body: ", typeof body); 
+	    }
+	   )   
 }
 
 exports.setLoc = function(id, lat, lng, title) {
-    console.log("********++++++++++ setting location");
-    setCRAttribute(id, "position", {lng: lng, lat: lat, title: title});
-    console.log("****** set location");
+    //console.log("********++++++++++ setting location");
+    var val = {lng: lng, lat: lat, title: title};
+    setCRAttribute(id, "position", val);
+    //console.log("****** finished set location");
 }
