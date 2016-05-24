@@ -89,10 +89,7 @@ exports.getThing = function(id, callback) {
 
 exports.setStoreForItem = function(storeId, itemId) {
     console.log("setting store id: " + storeId + " on item id: " + itemId);
-    item = exports.getItem(itemId, function(item) {
-	item.attributes.store = storeId
-	console.log("after: " + JSON.stringify(item));
-    });
+    things[itemId].attributes.store = storeId
 }
 
 exports.delThing = function(id) {
@@ -105,3 +102,6 @@ exports.setLoc = function(id, lat, lng, title) {
     things[id].attributes.position = {lng: lng, lat: lat, title: title}
 }
     
+exports.clearStoreForItem = function(id) {
+    things[id].attributes.store = "null"
+}

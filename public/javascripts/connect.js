@@ -25,7 +25,17 @@ $(document).ready(function() {
     $("#from").sortable({ // begin sortable
 	connectWith: labellist,
 	receive: function(event, ui) { // begin receive
-	    alert("dropped on from")
+	    $.ajax({
+		type: "GET",
+		url: "/clearstoreforitem",
+		data: {
+			itemId: event.toElement.id,
+		},
+		success: function(result) {
+		},
+	    });
+
+	    //alert("dropped on from")
 	}, // end receive
     }) // end sortable
 
@@ -34,16 +44,11 @@ $(document).ready(function() {
 	    $.ajax({
 		type: "GET",
 		url: "/setstoreforitem",
-//		contentType: 'application/json; charset=utf-8',
 		data: {
 			itemId: event.toElement.id,
 			storeId: event.target.id 
 		},
 		success: function(result) {
-//		    alert("dropped on " + 
-//			  event.target.id + 
-//			  " :: " + 
-//			  event.toElement.id);
 		},
 	    });
 	}

@@ -89,10 +89,10 @@ exports.getStores = function(callback) {
 
 
 
-exports.getThing= function(id, callback) {
+exports.getThing = function(id, callback) {
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
-    console.log("URI: ", params.uri);
+    //console.log("URI: ", params.uri);
     params.method = "GET";
 
     request(params, 
@@ -127,7 +127,7 @@ exports.addItem = function(itemName) { // JUST puts the name
     var params = restparams.getParams();
 
     var thisUuid = uuid();
-    console.log("uuid", thisUuid);
+    //console.log("uuid", thisUuid);
  
     params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
     params.method = "PUT";
@@ -145,7 +145,7 @@ exports.addStore = function(storeName) {
     var params = restparams.getParams();
 
     var thisUuid = uuid();
-    console.log("uuid", thisUuid);
+    //console.log("uuid", thisUuid);
  
     params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
     params.method = "PUT";
@@ -154,33 +154,39 @@ exports.addStore = function(storeName) {
     request(
 	params,
 	function(error, response, body) {
-	    console.log(body);
+	    //console.log(body);
 	}
     )
 }
 
-exports.setStoreForItem = function(storeId, itemId) {
+function setCRAttribute(id,key,val) {
+    console.log("setting attribute",id,key,val);
+
     var params = restparams.getParams();
-    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + itemId +
-	"/attributes/store";
-    console.log("URI: ", params.uri);
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id +
+	"/attributes/" + key;
+    //console.log("URI: ", params.uri);
     params.method = "PUT";
-    params.json = storeId;
+    params.json = val;
     request(params, 
 	    function(error, response, body) {
-		console.log("thing deleted");
+		//console.log("thing set returned");
 		//console.log("response: ", response);
 		//console.log("error: ", error);
 		//console.log("type of body: ", typeof body); 
 	    }
-	   )
-    
+	   )   
+}
+
+
+exports.setStoreForItem = function(storeId, itemId) {
+    setCRAttribute(itemId, "store", storeId);    
 }
 
 exports.delThing = function(id) {
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
-    console.log("URI: ", params.uri);
+    //console.log("URI: ", params.uri);
     params.method = "DELETE";
 
     request(params, 
@@ -194,29 +200,14 @@ exports.delThing = function(id) {
 };
 
 
-
-function setCRAttribute(id,key,val) {
-    //console.log("setting attribute",id,key,val);
-
-    var params = restparams.getParams();
-    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id +
-	"/attributes/" + key;
-    console.log("URI: ", params.uri);
-    params.method = "PUT";
-    params.json = val;
-    request(params, 
-	    function(error, response, body) {
-		//console.log("thing set returned");
-		//console.log("response: ", response);
-		//console.log("error: ", error);
-		//console.log("type of body: ", typeof body); 
-	    }
-	   )   
-}
-
 exports.setLoc = function(id, lat, lng, title) {
     //console.log("********++++++++++ setting location");
     var val = {lng: lng, lat: lat, title: title};
     setCRAttribute(id, "position", val);
     //console.log("****** finished set location");
+}
+
+exports.clearStoreForItem = function(id) {
+    console.log("clear store", id);
+    setCRAttribute(id, "store", "null");
 }
