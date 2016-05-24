@@ -242,3 +242,14 @@ exports.setTripDate = function(storeId, tripDate) {
     console.log("trip date", storeId, tripDate);
     setCRAttribute(storeId, "tripDate", tripDate);
 }
+
+exports.cancelRemoveTrip = function(storeId) {
+    console.log("cancel and remove storeid from all things", storeId);
+    exports.getItemsForStore(storeId, function(items) {
+	for(var i = 0; i < items.length; i++) {
+	    var itemId = items[i].thingId;
+	    console.log("clearing item " , i, itemId)
+	    exports.clearStoreForItem(itemId);
+	}
+    })
+}

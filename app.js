@@ -91,6 +91,13 @@ app.use('/settripdate', function(req, res) {
     res.redirect('/');
 });
 
+app.use('/cancelremovetrip', function(req, res) {
+    var storeId = req.query.storeId;
+    model.cancelRemoveTrip(storeId);
+    res.redirect('/');
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
