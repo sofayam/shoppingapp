@@ -105,3 +105,22 @@ exports.setLoc = function(id, lat, lng, title) {
 exports.clearStoreForItem = function(id) {
     things[id].attributes.store = "null"
 }
+
+exports.setTripDate = function(storeId, tripDate) {
+    things[storeId].attributes.tripDate = tripDate
+}
+
+exports.getItemsForStore = function(storeId, callback) {
+    exports.getItems(function(items) {
+	var filtered = []
+	for (var i=0; i<items.length; i++) {
+	    var item = items[i];
+	    if (item.attributes.store == storeId) {
+		filtered.push(item);
+	    }
+	}
+	callback(filtered);
+    });
+};
+
+

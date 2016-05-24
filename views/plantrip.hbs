@@ -1,0 +1,45 @@
+
+
+
+<h1>Plan trip to {{store.attributes.name}}</h1>
+
+to buy the following:
+<ul>
+{{#each items}}
+<li>
+	{{this.attributes.name}}
+</li>
+{{/each}}
+</ul>
+
+<form> 
+on: <input type="date" id=tripDate>
+</form>
+<button type="button" onclick="sendTripDate()">Fix Date</button> 
+{{#if store.attributes.tripDate}} 
+ (Currently {{store.attributes.tripDate}})
+{{else}}
+ (Currently unset)
+{{/if}} 
+
+<script>
+  function sendTripDate() {
+     var tripDate = document.getElementById("tripDate").value;
+     alert(tripDate);  
+  	$.ajax({
+	    type: "GET",
+	    url: "/settripdate",
+	    //		contentType: 'application/json; charset=utf-8',
+	    data: {
+		storeId: "{{store.thingId}}",
+		tripDate: tripDate,
+	    },
+	    success: function(result) {
+	    },
+	});
+	location.replace(document.referrer);
+
+  };
+  
+</script>
+

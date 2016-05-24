@@ -22,8 +22,9 @@ return [
  
 {{#each stores}}
 <div id="right">
-<h2>Buy at {{this.name}}</h2>
-
+<h2>Buy at {{this.name}}
+<a href="/plantrip?storeId={{this.id}}">plan trip</a>
+</h2>
 <ul id="{{this.id}}">
 {{#each this.items}}
 <li id={{this.thingId}}> {{this.attributes.name}}</li>

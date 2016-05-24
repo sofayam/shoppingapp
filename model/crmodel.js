@@ -87,6 +87,32 @@ exports.getStores = function(callback) {
 	   )
 };
 
+exports.getItemsForStore = function(storeId, callback) {
+
+    
+    var params = restparams.getParams();
+    params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things?filter=and(exists(attributes/name),eq(attributes/store,\"" + storeId + "\"))";
+    params.method = "GET";
+
+    request(params, 
+	    function(error, response, body) {
+		var bodydata = body;
+		try {
+		    // TBD complete mystery, sometimes the body arrives preparsed, 
+		    // sometimes as a string
+		    if (typeof body == "string") {
+			bodydata = JSON.parse(body);
+		    } 
+		} catch(e) {
+		    return console.error(e);
+		};
+		//console.log("bodydata : ", bodydata);
+		var items = bodydata.items;
+		callback(items)
+	    }
+	   )
+};
+
 
 
 exports.getThing = function(id, callback) {
@@ -210,4 +236,9 @@ exports.setLoc = function(id, lat, lng, title) {
 exports.clearStoreForItem = function(id) {
     console.log("clear store", id);
     setCRAttribute(id, "store", "null");
+}
+
+exports.setTripDate = function(storeId, tripDate) {
+    console.log("trip date", storeId, tripDate);
+    setCRAttribute(storeId, "tripDate", tripDate);
 }

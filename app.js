@@ -19,6 +19,7 @@ var delthing = require('./routes/delthing');
 var alloc = require('./routes/alloc');
 var chooseloc = require('./routes/chooseloc');
 var setloc = require('./routes/setloc');
+var plantrip = require('./routes/plantrip');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use('/delthing', delthing);
 app.use('/alloc', alloc);
 app.use('/chooseloc', chooseloc);
 app.use('/setloc', setloc);
+app.use('/plantrip', plantrip);
 
 app.use('/test', function(req, res) {
     
@@ -79,6 +81,13 @@ app.use('/setstoreforitem', function (req, res) {
 app.use('/clearstoreforitem', function(req, res) {
     var itemId = tocol(req.query.itemId);
     model.clearStoreForItem(itemId);
+    res.redirect('/');
+});
+
+app.use('/settripdate', function(req, res) {
+    var storeId = req.query.storeId;
+    var tripDate = req.query.tripDate;
+    model.setTripDate(storeId, tripDate);
     res.redirect('/');
 });
 
