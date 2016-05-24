@@ -29,13 +29,13 @@ router.get('/', function(req, res, next) {
 	var storeIds = getStoreIds(stores);
 	model.getItems(function(items) {
 
-	    console.log("Stores " + JSON.stringify(stores));
+	    //console.log("Stores " + JSON.stringify(stores));
 
 	    for (var i=0; i < stores.length; i++) {
 		storeId = nocol(stores[i].thingId);
 		storesWithItems[storeId] = {id: storeId, name: stores[i].attributes.name, items: []};
 	    }
-	    console.log("Stores with items: " + JSON.stringify(storesWithItems));
+	    //console.log("Stores with items: " + JSON.stringify(storesWithItems));
 
 	    for (var i=0; i < items.length; i++) {
 
@@ -54,7 +54,7 @@ router.get('/', function(req, res, next) {
 		//	}
 	    }
 	    
-	    console.log("Stores with items: " + JSON.stringify(storesWithItems));
+	    //console.log("Stores with items: " + JSON.stringify(storesWithItems));
 	    
 	    res.render('alloc', 
 		       {title: "Allocate your shopping", 
