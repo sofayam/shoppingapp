@@ -77,7 +77,7 @@ function initAutocomplete() {
 	    var markie = new google.maps.Marker({
 		map: map,
 		icon: icon,
-		title: place.name,
+		title: place.formatted_address,
 		position: place.geometry.location
 	    });
 	    markers.push(markie);
