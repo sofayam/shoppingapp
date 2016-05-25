@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 
 var model = require('./model/model');
+var tagformatter = require('./util/tagformatter');
 
 var routes = require('./routes/index');
 var listitems = require('./routes/listitems');
@@ -63,23 +64,17 @@ app.use('/test', function(req, res) {
     res.redirect('/');
 });
 
-function tocol (nocol) {
-    var col = nocol.replace('Z', ':');
-    //console.log("col: " + col)
-    return col
-};
 
 app.use('/setstoreforitem', function (req, res) {
-//    console.log("here are the params " + req.query.storeId);
-    // TBD horrible hack to see how easily we can make CR ids html tag-fähig
-    var storeId = tocol(req.query.storeId);
-    var itemId = tocol(req.query.itemId);
+
+    var storeId = tagformatter.decode(req.query.storeId);
+    var itemId = tagformatter.decode(req.query.itemId);
     model.setStoreForItem(storeId, itemId);
     res.redirect('/');
 });
 
 app.use('/clearstoreforitem', function(req, res) {
-    var itemId = tocol(req.query.itemId);
+    var itemId = tagformatter.decode(req.query.itemId);
     model.clearStoreForItem(itemId);
     res.redirect('/');
 });

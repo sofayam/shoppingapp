@@ -1,10 +1,11 @@
 var express = require('express');
 var model = require('../model/model.js');
+var tagformatter = require('../util/tagformatter.js');
 var router = express.Router();
 
 router.get('/', function(req, resp, next) {
     
-    var storeId = req.query.storeId.replace('Z', ':');
+    var storeId = tagformatter.decode(req.query.storeId);
     // gather info about the trip to the store
     model.getThing(storeId, function(store) {
 	console.log("got store :", store.attributes.name)
