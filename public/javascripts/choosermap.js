@@ -31,7 +31,7 @@ function initAutocomplete() {
 		id: getParams().id,
 		lng: this.position.lng(),
 		lat: this.position.lat(),
-		title: this.title
+		address: this.title
 	    },
 	    success: function(result) {
 		location.replace(document.referrer)

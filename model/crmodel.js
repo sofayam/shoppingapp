@@ -239,9 +239,9 @@ exports.delThing = function(id) {
 };
 
 
-exports.setLoc = function(id, lat, lng, title) {
+exports.setLoc = function(id, lat, lng, address) {
     //console.log("********++++++++++ setting location");
-    var val = {lng: lng, lat: lat, title: title};
+    var val = {lng: lng, lat: lat, address: address};
     setCRAttribute(id, "position", val);
     //console.log("****** finished set location");
 }

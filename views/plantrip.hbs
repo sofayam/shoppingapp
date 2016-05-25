@@ -5,7 +5,13 @@
 </script>
 <script src="/javascripts/shoppingTrip.js"></script>
 
-<h1>Plan trip to {{store.attributes.name}}</h1>
+<h1>Plan trip to {{store.attributes.name}}
+{{#if store.attributes.position.address}}
+ at {{store.attributes.position.address}}
+{{else}}
+  <a href=/chooseloc?id={{store.thingId}}&name={{store.attributes.name}}>(locate this store)</a>
+{{/if}}
+</h1>
 {{#if items.length}}
 to buy the following:
 <ul>
