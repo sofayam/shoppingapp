@@ -34,14 +34,9 @@ function initAutocomplete() {
 		title: this.title
 	    },
 	    success: function(result) {
-		//		    alert("dropped on " + 
-		//			  event.target.id + 
-		//			  " :: " + 
-		//			  event.toElement.id);
+		location.replace(document.referrer)
 	    },
 	});
-	location.replace(document.referrer);
-
     }
 
     var markers = [];

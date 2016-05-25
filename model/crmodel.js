@@ -26,7 +26,11 @@ exports.getItems = function(callback) {
 		    return console.error(e);
 		};
 		//console.log("bodydata : ", bodydata);
-		var items = bodydata.items;
+		if (bodydata) {
+		    items = bodydata.items		
+		} else {
+		    items = []
+		}
 		callback(items)
 	    }
 	   )
@@ -54,7 +58,11 @@ exports.getThings = function(callback) {
 		    return console.error(e);
 		};
 		//console.log("bodydata : ", bodydata);
-		var items = bodydata.items;
+		if (bodydata) {
+		    items = bodydata.items		
+		} else {
+		    items = []
+		}
 		callback(items)
 	    }
 	   )
@@ -81,7 +89,12 @@ exports.getStores = function(callback) {
 		    return console.error(e);
 		};
 		//console.log("bodydata : ", bodydata);
-		var items = bodydata.items;
+		var items;
+		if (bodydata) {
+		    items = bodydata.items		
+		} else {
+		    items = []
+		}
 		callback(items)
 	    }
 	   )
@@ -243,8 +256,10 @@ exports.setTripDate = function(storeId, tripDate) {
     setCRAttribute(storeId, "tripDate", tripDate);
 }
 
+// TBD this is copied from mockmodel - share this properly
 exports.cancelRemoveTrip = function(storeId) {
     console.log("cancel and remove storeid from all things", storeId);
+    exports.setTripDate(storeId, "unset");
     exports.getItemsForStore(storeId, function(items) {
 	for(var i = 0; i < items.length; i++) {
 	    var itemId = items[i].thingId;

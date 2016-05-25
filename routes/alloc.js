@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 
 	    for (var i=0; i < stores.length; i++) {
 		storeId = nocol(stores[i].thingId);
-		storesWithItems[storeId] = {id: storeId, name: stores[i].attributes.name, items: []};
+		storesWithItems[storeId] = {id: storeId, name: stores[i].attributes.name, store: stores[i], items: []};
 	    }
 	    //console.log("Stores with items: " + JSON.stringify(storesWithItems));
 

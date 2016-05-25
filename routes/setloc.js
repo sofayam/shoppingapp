@@ -11,7 +11,7 @@ router.get('/', function(req, resp, next) {
 
     console.log(" setting the location ");
     model.setLoc(id,lat,lng, title);
-    
+    resp.redirect('/');
 });
 
 module.exports = router;

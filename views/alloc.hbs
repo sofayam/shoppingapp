@@ -24,6 +24,11 @@ return [
 <div id="right">
 <h2>Buy at {{this.name}}
 <a href="/plantrip?storeId={{this.id}}">plan trip</a>
+{{#if this.store.attributes.tripDate}} 
+ (Currently {{this.store.attributes.tripDate}})
+{{else}}
+ (Currently unset)
+{{/if}} 
 </h2>
 <ul id="{{this.id}}">
 {{#each this.items}}

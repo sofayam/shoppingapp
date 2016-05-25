@@ -6,7 +6,7 @@
 <script src="/javascripts/shoppingTrip.js"></script>
 
 <h1>Plan trip to {{store.attributes.name}}</h1>
-
+{{#if items.length}}
 to buy the following:
 <ul>
 {{#each items}}
@@ -15,17 +15,26 @@ to buy the following:
 </li>
 {{/each}}
 </ul>
-
+{{else}}
+no items currently allocated
+<p>
+{{/if}} 
 <form> 
 on: <input type="date" id=tripDate>
 </form>
+<p>
 <button type="button" onclick="sendTripDate()">Fix Date</button> 
+<div id=currentFixedDate>
 {{#if store.attributes.tripDate}} 
  (Currently {{store.attributes.tripDate}})
 {{else}}
  (Currently unset)
 {{/if}} 
+</div>
+<p>
 <button type="button" onclick="notifyRoutePlanner()">Notify Route Planner</button> 
+<p>
 <button type="button" onclick="cancelRemoveTrip()">Cancel Trip and Remove Items</button> 
+<p>
 <button type="button" onclick="returnAlloc()">Return to allocation page</button> 
 

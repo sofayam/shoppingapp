@@ -127,6 +127,7 @@ exports.getItemsForStore = function(storeId, callback) {
 // maybe do something with prototypes to share this code properly
 exports.cancelRemoveTrip = function(storeId) {
     console.log("cancel and remove storeid from all things", storeId);
+    exports.setTripDate(storeId, "unset");
     exports.getItemsForStore(storeId, function(items) {
 	for(var i = 0; i < items.length; i++) {
 	    var itemId = items[i].thingId;

@@ -12,7 +12,8 @@ function sendTripDate() {
 	    storeId: getThingId(),
 	    tripDate: tripDate,
 	},
-	success: function(result) {
+	success: function(result) { 
+	    document.getElementById("currentFixedDate").innerHTML = "(Now " + tripDate + ")";
 	},
     });
 };
