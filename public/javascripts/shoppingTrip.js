@@ -37,7 +37,7 @@ function notifyRoutePlanner() {
 }
 
 function returnAlloc() {
-    location.replace(document.referrer);
+    location.replace("/alloc");
 }
 
 

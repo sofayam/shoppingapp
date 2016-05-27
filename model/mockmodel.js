@@ -41,11 +41,11 @@ setupStores(things,4);
 
 function getType(type) {
     var found = []
-    console.log("Looking at things for type" + JSON.stringify(type));
+    // console.log("Looking at things for type" + JSON.stringify(type));
     for (id in things) {
-	console.log("Looking at thing" + JSON.stringify(things[id]));
+	// console.log("Looking at thing" + JSON.stringify(things[id]));
 	if ((things[id].attributes.type == type) || (type == null)){
-	    console.log("pushing thing" + JSON.stringify(id));
+	    // console.log("pushing thing" + JSON.stringify(id));
 	    found.push(things[id])
 	}
     }
@@ -54,19 +54,19 @@ function getType(type) {
 
 
 exports.getItems = function(callback) {
-    console.log("getting items");
+    // console.log("getting items");
     var items = getType("purchase");
     callback && callback(items);
 }
 
 exports.getStores = function(callback) {
-    console.log("getting stores");
+    // console.log("getting stores");
     var stores = getType("store");
     callback && callback(stores);
 }
 
 exports.getThings = function(callback) {
-    console.log("getting things");
+    // console.log("getting things");
     var stores = getType();
     callback && callback(stores);
 }
@@ -81,14 +81,14 @@ exports.addStore = function(storeName) {
 }
 
 exports.getThing = function(id, callback) {
-    console.log("get thing");
+    // console.log("get thing");
     var thing = things[id];
     callback && callback(thing);
 }
 
 
 exports.setStoreForItem = function(storeId, itemId) {
-    console.log("setting store id: " + storeId + " on item id: " + itemId);
+    // console.log("setting store id: " + storeId + " on item id: " + itemId);
     things[itemId].attributes.store = storeId
 }
 
@@ -98,7 +98,7 @@ exports.delThing = function(id) {
 }
 
 exports.setLoc = function(id, lat, lng, address) {
-    console.log("setting loc for store id: " + id + " at: " + lng + " x " + lat);
+    // console.log("setting loc for store id: " + id + " at: " + lng + " x " + lat);
     things[id].attributes.position = {lng: lng, lat: lat, address: address}
 }
     
@@ -123,20 +123,7 @@ exports.getItemsForStore = function(storeId, callback) {
     });
 };
 
-// TBD this is the first one which is identical for both models, 
-// maybe do something with prototypes to share this code properly
-exports.cancelRemoveTrip = function(storeId) {
-    console.log("cancel and remove storeid from all things", storeId);
-    exports.setTripDate(storeId, "unset");
-    exports.getItemsForStore(storeId, function(items) {
-	for(var i = 0; i < items.length; i++) {
-	    var itemId = items[i].thingId;
-	    console.log("clearing item " , i, itemId)
-	    exports.clearStoreForItem(itemId);
-	}
-    })
-}
-
+// For shared functions look in model.js
 
 
 
