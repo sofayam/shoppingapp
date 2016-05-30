@@ -1,5 +1,7 @@
 config = require ('./config.js');
 
+var res
+
 if (config.model == "mongo") {
     res = require('./mongomodel.js')
 } else if (config.model == "cr") {
