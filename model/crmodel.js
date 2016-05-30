@@ -6,124 +6,71 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // Rest calls will fail if this is not directly assigned in 
 // this file (will not work if just in restparams.js)
 
+var unpack = true; var singlevalue = false;
+
+function CRRequest(params, callback, unpackflag) {
+
+    request(params, 
+	    function(error, response, body) {
+		var bodydata = body;
+		try { 
+		    // TBD complete mystery, sometimes the body arrives preparsed, 
+		    // sometimes as a string
+
+		    if (typeof body == "string") {
+			bodydata = JSON.parse(body);
+		    } 
+		} catch(e) {
+		    return console.error(e);
+		};
+		//console.log("bodydata : ", bodydata);
+		if (unpackflag) {
+		    if (bodydata) {
+			items = bodydata.items		
+		    } else {
+			items = []
+		    }
+		    callback(items)
+		} else {
+		    callback(bodydata)
+		}
+	    })
+}
+
 
 exports.getItems = function(callback) {
 
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things?filter=and(exists(attributes/name),eq(attributes/type,\"purchase\"))";
     params.method = "GET";
-
-    request(params, 
-	    function(error, response, body) {
-		try {
-		    // TBD complete mystery, sometimes the body arrives preparsed, 
-		    // sometimes as a string
-		    var bodydata = body;
-		    if (typeof body == "string") {
-			bodydata = JSON.parse(body);
-		    } 
-		} catch(e) {
-		    return console.error(e);
-		};
-		//console.log("bodydata : ", bodydata);
-		if (bodydata) {
-		    items = bodydata.items		
-		} else {
-		    items = []
-		}
-		callback(items)
-	    }
-	   )
+    CRRequest(params,callback,unpack);
 };
 
 
 
 exports.getThings = function(callback) {
-
     
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things";
     params.method = "GET";
-
-    request(params, 
-	    function(error, response, body) {
-		try {
-		    // TBD complete mystery, sometimes the body arrives preparsed, 
-		    // sometimes as a string
-		    var bodydata = body;
-		    if (typeof body == "string") {
-			bodydata = JSON.parse(body);
-		    } 
-		} catch(e) {
-		    return console.error(e);
-		};
-		//console.log("bodydata : ", bodydata);
-		if (bodydata) {
-		    items = bodydata.items		
-		} else {
-		    items = []
-		}
-		callback(items)
-	    }
-	   )
+    CRRequest(params,callback,unpack); 
 };
 
 
 exports.getStores = function(callback) {
-
     
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things?filter=and(exists(attributes/name),eq(attributes/type,\"store\"))";
     params.method = "GET";
-
-    request(params, 
-	    function(error, response, body) {
-		try {
-		    // TBD complete mystery, sometimes the body arrives preparsed, 
-		    // sometimes as a string
-		    var bodydata = body;
-		    if (typeof body == "string") {
-			bodydata = JSON.parse(body);
-		    } 
-		} catch(e) {
-		    return console.error(e);
-		};
-		//console.log("bodydata : ", bodydata);
-		var items;
-		if (bodydata) {
-		    items = bodydata.items		
-		} else {
-		    items = []
-		}
-		callback(items)
-	    }
-	   )
+    CRRequest(params,callback,unpack); 
 };
 
 exports.getItemsForStore = function(storeId, callback) {
-
     
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/search/things?filter=and(exists(attributes/name),eq(attributes/store,\"" + storeId + "\"))";
     params.method = "GET";
-
-    request(params, 
-	    function(error, response, body) {
-		var bodydata = body;
-		try {
-		    // TBD complete mystery, sometimes the body arrives preparsed, 
-		    // sometimes as a string
-		    if (typeof body == "string") {
-			bodydata = JSON.parse(body);
-		    } 
-		} catch(e) {
-		    return console.error(e);
-		};
-		//console.log("bodydata : ", bodydata);
-		var items = bodydata.items;
-		callback(items)
-	    }
-	   )
+    CRRequest(params,callback,unpack); 
 };
 
 
@@ -133,36 +80,11 @@ exports.getThing = function(id, callback) {
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
     //console.log("URI: ", params.uri);
     params.method = "GET";
-
-    request(params, 
-	    function(error, response, body) {
-		//console.log("response: ", response);
-		//console.log("error: ", error);
-		//console.log("type of body: ", typeof body); 
-
-		//console.log("Body : ", body);
-		try {
-		    // TBD complete mystery, sometimes the body arrives preparsed, 
-		    // sometimes as a string
-		    var bodydata = body;
-		    if (typeof body == "string") {
-			bodydata = JSON.parse(body);
-		    } 
-		} catch(e) {
-		    return console.error(e);
-		}
-		//console.log("bodydata : ", bodydata);
-		//console.log("bodydata type: ", typeof bodydata);
-		callback && callback(bodydata);
-	    }
-	   )
-
-
-
+    CRRequest(params,callback,singlevalue);
 }
 
-// add item raw materials
-exports.addItem = function(itemName) { // JUST puts the name
+addThing = function(attributes) {
+
     var params = restparams.getParams();
 
     var thisUuid = uuid();
@@ -170,7 +92,7 @@ exports.addItem = function(itemName) { // JUST puts the name
  
     params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
     params.method = "PUT";
-    params.json = {attributes: {type: "purchase", name: itemName}};
+    params.json = attributes;
 
     request(
 	params,
@@ -178,24 +100,16 @@ exports.addItem = function(itemName) { // JUST puts the name
 	    console.log(body);
 	}
     )
+
+}
+
+
+exports.addItem = function(itemName) {
+    addThing({attributes: {type: "purchase", name: itemName}});
 }
 
 exports.addStore = function(storeName) {
-    var params = restparams.getParams();
-
-    var thisUuid = uuid();
-    //console.log("uuid", thisUuid);
- 
-    params.uri =  "https://cr.apps.bosch-iot-cloud.com/cr/1/things/markandrew:" + thisUuid;
-    params.method = "PUT";
-    params.json = {attributes: {type: "store", name: storeName}};
-
-    request(
-	params,
-	function(error, response, body) {
-	    //console.log(body);
-	}
-    )
+    addThing({attributes: {type: "store", name: storeName}});
 }
 
 function setCRAttribute(id,key,val) {
@@ -209,10 +123,6 @@ function setCRAttribute(id,key,val) {
     params.json = val;
     request(params, 
 	    function(error, response, body) {
-		//console.log("thing set returned");
-		//console.log("response: ", response);
-		//console.log("error: ", error);
-		//console.log("type of body: ", typeof body); 
 	    }
 	   )   
 }
@@ -230,20 +140,14 @@ exports.delThing = function(id) {
 
     request(params, 
 	    function(error, response, body) {
-		console.log("thing deleted");
-		//console.log("response: ", response);
-		//console.log("error: ", error);
-		//console.log("type of body: ", typeof body); 
 	    }
 	   )
 };
 
 
 exports.setLoc = function(id, lat, lng, address) {
-    //console.log("********++++++++++ setting location");
     var val = {lng: lng, lat: lat, address: address};
     setCRAttribute(id, "position", val);
-    //console.log("****** finished set location");
 }
 
 exports.clearStoreForItem = function(id) {
