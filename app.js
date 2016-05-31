@@ -21,6 +21,8 @@ var alloc = require('./routes/alloc');
 var chooseloc = require('./routes/chooseloc');
 var setloc = require('./routes/setloc');
 var plantrip = require('./routes/plantrip');
+var setconfig = require('./routes/setconfig');
+var config = require('./routes/config');
 
 var app = express();
 
@@ -57,6 +59,8 @@ app.use('/alloc', alloc);
 app.use('/chooseloc', chooseloc);
 app.use('/setloc', setloc);
 app.use('/plantrip', plantrip);
+app.use('/config', config);
+app.use('/setconfig', setconfig);
 
 app.use('/test', function(req, res) {
     
@@ -91,7 +95,6 @@ app.use('/cancelremovetrip', function(req, res) {
     model.cancelRemoveTrip(storeId);
     res.redirect('/');
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

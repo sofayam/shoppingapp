@@ -1,17 +1,11 @@
-config = require ('./config.js');
+configfile = require ('../routes/configfile.js');
 
-var res
+config = configfile.getConfig();
 
-if (config.model == "mongo") {
-    res = require('./mongomodel.js')
-} else if (config.model == "cr") {
-    res = require('./crmodel.js')
-} else if (config.model == "mock") {
-    res = require('./mockmodel.js')
-} else {
-   throw "bad config value: " + config.model 
-}
+var requirePath = "./" + config.model.current;
 
+var res = require(requirePath);
+console.log("requiring ", requirePath);
 module.exports = exports = res
 
 // TBD this is the first one which is identical for both models, 

@@ -1,0 +1,32 @@
+<h1 style="color:{{config.colour.current}};">{{title}}</h1>
+
+<form action=#>
+   <fieldset>
+     {{#each config}}
+     <label for={{@key}}>Choose {{@key}}</label> 
+     <select name={{@key}} id={{@key}}selector>
+       {{#each this.choices}}
+       <option>{{this}}</option>
+       {{/each}}
+     </select>
+     <p>
+     {{/each}}
+   </fieldset>
+</form>
+
+<script>
+function saveSettings() {
+	$.ajax({
+	    type: "GET",
+	    url: "/setconfig",
+	    data: {
+	   {{#each config}}
+	       {{@key}}: $("#{{@key}}selector").val(),
+           {{/each}}		    
+	    },
+	    success: function(result) {
+		location.replace(document.referrer)
+	    }})
+}
+</script>
+<button type="button" onclick="saveSettings()">Save Settings</button> 
