@@ -58,10 +58,9 @@ exports.getThing = function(id, callback) {
     mc.connect(url, function(err,db) {
 	assert.equal(null,err);
 	var res;
-	console.log("found a mongo thing", res)
 	db.collection(collName).findOne({"thingId": id}, function(err,thing){
 	    assert.equal(err, null);
-	    console.log("found a mongo thing", thing)
+	    // console.log("found a mongo thing", thing)
 	    callback(thing);
 	    
 	});
@@ -72,7 +71,7 @@ exports.getThing = function(id, callback) {
 
 function addThing(thing) {
     var url = getURI();
-    console.log("adding a mongo thing");
+    // console.log("adding a mongo thing");
     mc.connect(url, function(err,db) {
 	assert.equal(null,err);
 	db.collection(collName).insertOne(thing, function (err, result) {
@@ -129,8 +128,6 @@ function setCRAttribute(id,key,val) {
     var url = getURI();
     mc.connect(url, function(err,db) {
 	assert.equal(null,err);
-	var res;
-	console.log("found a mongo thing", res)
 	var strkey = "attributes." + key
 	var setting = {}
 	setting[strkey] = val
@@ -144,12 +141,12 @@ exports.setLoc = function(id, lat, lng, address) {
 }
 
 exports.clearStoreForItem = function(id) {
-    console.log("clear store", id);
+    //console.log("clear store", id);
     setCRAttribute(id, "store", "null");
 } 
 
 exports.setTripDate = function(storeId, tripDate) {
-    console.log("trip date", storeId, tripDate);
+    //console.log("trip date", storeId, tripDate);
     setCRAttribute(storeId, "tripDate", tripDate);
 }
 
