@@ -9,7 +9,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 var unpack = true; var singlevalue = false;
 
 function CRRequest(params, callback, unpackflag) {
-
     request(params, 
 	    function(error, response, body) {
 		var bodydata = body;
@@ -37,7 +36,6 @@ function CRRequest(params, callback, unpackflag) {
 	    })
 }
 
-
 exports.getItems = function(callback) {
 
     var params = restparams.getParams();
@@ -46,8 +44,6 @@ exports.getItems = function(callback) {
     CRRequest(params,callback,unpack);
 };
 
-
-
 exports.getThings = function(callback) {
     
     var params = restparams.getParams();
@@ -55,7 +51,6 @@ exports.getThings = function(callback) {
     params.method = "GET";
     CRRequest(params,callback,unpack); 
 };
-
 
 exports.getStores = function(callback) {
     
@@ -72,8 +67,6 @@ exports.getItemsForStore = function(storeId, callback) {
     params.method = "GET";
     CRRequest(params,callback,unpack); 
 };
-
-
 
 exports.getThing = function(id, callback) {
     var params = restparams.getParams();
@@ -103,7 +96,6 @@ addThing = function(attributes) {
 
 }
 
-
 exports.addItem = function(itemName) {
     addThing({attributes: {type: "purchase", name: itemName}});
 }
@@ -127,11 +119,10 @@ function setCRAttribute(id,key,val) {
 	   )   
 }
 
-
 exports.setStoreForItem = function(storeId, itemId) {
     setCRAttribute(itemId, "store", storeId);    
 }
-
+ 
 exports.delThing = function(id) {
     var params = restparams.getParams();
     params.uri = "https://cr.apps.bosch-iot-cloud.com/cr/1/things/" + id ;
@@ -143,7 +134,6 @@ exports.delThing = function(id) {
 	    }
 	   )
 };
-
 
 exports.setLoc = function(id, lat, lng, address) {
     var val = {lng: lng, lat: lat, address: address};
