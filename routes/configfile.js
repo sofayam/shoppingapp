@@ -22,6 +22,6 @@ exports.setConfig = function(changes) {
 }
 
 // just read this once at the beginning so you can refer to it 
-// dynamically withouth bashing on the file system
+// dynamically without bashing on the file system
 
 var config = readConfig() 
