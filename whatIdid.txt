@@ -57,7 +57,11 @@ installed debugger {
 page to add locations for shops using google maps api and my api key for which I
 had to pray to google on bended knees somehow (not sure how long that will hold up)
 
-
+switched to VS Code because of:
+	-debugging (works now that I have updated git to latest git for windows)
+	-intellisense (will really come into its own using Typescript, which will be needed
+	if Angular 2.0 is to be used)
+	-general brilliance 
 
 
 
