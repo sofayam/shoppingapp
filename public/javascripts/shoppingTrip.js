@@ -33,6 +33,7 @@ function cancelRemoveTrip() {
 }
 
 function notifyRoutePlanner() {
+	
     alert ("coming soon!!!")
 }
 
