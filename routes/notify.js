@@ -15,8 +15,8 @@ router.get('/', function (req, res, next) {
                 "type": "VISIT",
                 "objectDescription": "Shopping",
                 "possibleLocations": [{
-                    "lon": store.attributes.position.lng,
-                    "lat": store.attributes.position.lat,
+                    "lon": parseFloat(store.attributes.position.lng),
+                    "lat": parseFloat(store.attributes.position.lat),
                     "country": store.attributes.position.address,
                     "zip": null,
                     "place": null,
