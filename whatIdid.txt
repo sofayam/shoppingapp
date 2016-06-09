@@ -63,5 +63,12 @@ switched to VS Code because of:
 	if Angular 2.0 is to be used)
 	-general brilliance 
 
+switched on intellisense for vscode by
+	adding jsconfig.json
+	installing typings
+	typings install dt~* for express, node, request, serve-static and express-serve-static-core
+
+added code command line to mac with F1 shell command (and then found proper command)
+
 
 
