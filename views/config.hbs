@@ -1,12 +1,12 @@
-<h1 style="color:{{config.colour.current}};">{{title}}</h1>
+<h1 style="color:{{color}};">{{title}}</h1>
 
 <form action=#>
    <fieldset>
      {{#each config}}
      <label for={{@key}}>Choose {{@key}}</label> 
      <select name={{@key}} id={{@key}}selector>
-       {{#each this.choices}}
-       <option>{{this}}</option>
+       {{#each this}}
+       <option {{#if this.selected}}selected{{/if}}>{{this.choice}}</option>
        {{/each}}
      </select>
      <p>

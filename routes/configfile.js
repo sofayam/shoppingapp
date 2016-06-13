@@ -9,6 +9,17 @@ exports.getConfig = function () {
     return config
 }
 
+exports.getSelected = function (setting){
+    var choices = config[setting];
+    for(i = 0; i < choices.length; i++)
+    {
+        if (choices[i].selected) {
+            return choices[i].choice;
+        }
+    }
+    throw "bad config file: no choice selected"
+}
+
 checkExistsAndSetup = function () {
     if (!(fs.existsSync(configName))) {
         config = JSON.parse(fs.readFileSync(configBackup).toString());
@@ -30,7 +41,10 @@ readConfig = function () {
 exports.setConfig = function (changes) {
     console.log("started setting config from form", JSON.stringify(config));
     for (key in changes) {
-        config[key].current = changes[key]
+        var choices = config[key]
+        for (i=0; i<choices.length; i++) {
+            choices[i]["selected"] = (changes[key] == choices[i].choice) 
+        }
     }
     console.log("finished setting config from form", JSON.stringify(config));
     fs.writeFileSync(configName, JSON.stringify(config))

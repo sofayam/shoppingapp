@@ -1,1 +1,9 @@
-{"model":{"choices":["mockmodel.js","crmodel.js","mongomodel.js"],"current":"mockmodel.js"},"colour":{"choices":["green","blue","red"],"current":"green"}}
+{"model":
+    [{"choice": "mockmodel.js"},
+     {"choice": "crmodel.js", "selected": true},
+    {"choice": "mongomodel.js"}],
+ "colour":
+    [{"choice":"green"},
+    {"choice":"red", "selected": true},
+    {"choice":"blue"}]
+}

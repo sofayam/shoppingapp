@@ -1,8 +1,8 @@
 configfile = require ('../routes/configfile.js');
 
-config = configfile.getConfig();
+var model = configfile.getSelected("model");
 
-var requirePath = "./" + config.model.current;
+var requirePath = "./" + model;
 
 var res = require(requirePath);
 console.log("requiring ", requirePath);
