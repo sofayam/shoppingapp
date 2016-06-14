@@ -10,6 +10,21 @@ function createStore(storeName) {
     return {thingId: "markandrew:" + uuid(), 
 	    attributes: {name: storeName, type: "store"}};
 }
+function setupItemsNamed(things) {
+    var names = ["eggs", "bread", "milk"]
+    for (i = 0; i < names.length; i++) {
+        var item = createItem(names[i]);
+        things[item.thingId] = item;
+    }
+}
+function setupStoresNamed(things) {
+    var names = ["aldi", "penny", "rewe"]
+    for (i = 0; i < names.length; i++) {
+        var item = createStore(names[i]);
+        things[item.thingId] = item;
+    }
+}
+
 
 function setupItems(things, count) {
     while(count > 0) {
@@ -30,9 +45,9 @@ function setupStores(things, count) {
 
 var things = {};
 
-setupItems(things,2);
+setupItemsNamed(things);
 //console.log("All your things " + JSON.stringify(things));
-setupStores(things,4);
+setupStoresNamed(things);
 //console.log("All your things " + JSON.stringify(things));
 
 //var items = setupItems(10);
