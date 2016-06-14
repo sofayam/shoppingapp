@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
         var id = model.getThing(req.query.id, function (store) {
 
             var activity = {
-                "ID": 0,
+                "ID": 0,  // Create new activity
                 "userID": 123, // TBD ???
                 "goalDescription": "Shopping trip to " + store.attributes.name,
                 "type": "VISIT",
@@ -41,9 +41,14 @@ router.get('/', function (req, res, next) {
             console.log("making http request to MobiAssi")
             
             params = {
-                uri: "http://localhost:8080/writeNewCalendarEntry",
+                uri: "http://localhost:9090/writeNewCalendarEntry",
                 method: "POST",
-                json: {content: activity},
+                json: { content: activity },
+
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
             }
             request(
                 params,
