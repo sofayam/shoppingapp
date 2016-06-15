@@ -4,6 +4,8 @@ var model = require('../model/model.js');
 
 var router = express.Router();
 
+var KDPort = 9090;  // Careful - this is NOT the port used by the Assistance App
+
 router.get('/', function (req, res, next) {
     if (req.query.id) {
         var id = model.getThing(req.query.id, function (store) {
@@ -36,33 +38,26 @@ router.get('/', function (req, res, next) {
                 "tripchainID": 0
             }
 
+            var sendString = JSON.stringify(activity);
+            var formData = { content: sendString };
+
+
             // request on assistance app writeNewCalendarEntry with content = activity
 
             console.log("making http request to MobiAssi")
-            
-            params = {
-                uri: "http://localhost:9090/writeNewCalendarEntry",
-                method: "POST",
-                json: { content: activity },
 
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-            }
-            request(
-                params,
-                function(err,resp,body) {
-                    console.log("returned from writeNewCalendarEntry: " + err)        
-                }
-            )
 
-            res.render('notify',
+            request.post(
                 {
-                    title: 'Notified following activity to Mobility Assistance',
-                    item: JSON.stringify(activity, undefined, " ")
-                })
-        });
+                    url: "http://localhost:" + KDPort + "/writeNewCalendarEntry",
+                    formData: formData
+                },
+                function (err, resp, body) {
+                    console.log("returned from simple call to writeNewCalendarEntry: " + err)
+                });
+            res.render('notify', {title: "Activity sent to KalenderDienst", item: sendString})
+
+        })
     }
 })
 

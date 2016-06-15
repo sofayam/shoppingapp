@@ -70,5 +70,35 @@ switched on intellisense for vscode by
 
 added code command line to mac with F1 shell command (and then found proper command)
 
+Code to test Philip's http server:
+
+{
+  "ID" : 0,
+  "userID" : 123,
+  "goalDescription" : "Meeting mit XY",
+  "type" : "VISIT",
+  "objectDescription" : "Besprechung",
+  "possibleLocations" : [ {
+    "lon" : 9.974529,
+    "lat" : 52.173770,
+    "country" : "Weinhagenstr. Hildesheim",
+    "zip" : null,
+    "place" : null,
+    "street" : null,
+    "number" : null
+  } ],
+  "userDecision" : "ACCEPTED",
+  "location" : null,
+  "earliest_start" : "2016-05-25 08:00:00",
+  "latest_start" : "2016-05-25 08:00:00",
+  "duration" : 6000,
+  "startTime" : null,
+  "partners" : [ ],
+  "notifiedOnDelay" : [ ],
+  "originDefault" : null,
+  "priority" : 0,
+  "tripchainID" : 0
+}
+
 
 
