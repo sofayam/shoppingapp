@@ -24,6 +24,7 @@ var plantrip = require('./routes/plantrip');
 var setconfig = require('./routes/setconfig');
 var config = require('./routes/config');
 var notify = require('./routes/notify');
+var resetplans = require('./routes/resetplans');
 
 var app = express();
 
@@ -63,6 +64,7 @@ app.use('/plantrip', plantrip);
 app.use('/config', config);
 app.use('/setconfig', setconfig);
 app.use('/notify', notify);
+app.use('/resetplans', resetplans);
 
 app.use('/test', function(req, res) {
     

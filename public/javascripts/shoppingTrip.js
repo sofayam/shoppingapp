@@ -32,10 +32,6 @@ function cancelRemoveTrip() {
     setTimeout(returnAlloc, 1000); // wait for the db write commands to go through
 }
 
-function notifyRoutePlanner() {
-	
-    alert ("coming soon!!!")
-}
 
 function returnAlloc() {
     location.replace("/alloc");
