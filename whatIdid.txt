@@ -36,6 +36,7 @@ git config --global http.sslVerify false
 
 git push -u bitbuk
 
+
 (20160427)
 
 npm install node-rest-client
@@ -99,6 +100,7 @@ Code to test Philip's http server:
   "priority" : 0,
   "tripchainID" : 0
 }
+
 
 
 
